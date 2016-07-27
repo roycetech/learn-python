@@ -1,4 +1,5 @@
 #!/usr/bin/env python3.5
+# -*- coding: utf-8 -*-
 
 
 # This script is used to dump the folder structure for content 
