@@ -3,7 +3,8 @@
 
 
 # This script is used to dump the folder structure for content 
-# analysis.  File is dumped on the desktop.
+# analysis.  Source Folder and Destinations are hard coded. @see `root_path` and
+# `target`
 
 
 import glob
@@ -17,7 +18,7 @@ def ignore(path):
 
 # @param target - file handle for writing.
 # @param path - path to recurse
-def printFolderContents(target, path, depth = 0):
+def print_folder_contents(target, path, depth = 0):
     if depth == 0:
         space = ''
     else:
@@ -42,14 +43,15 @@ def printFolderContents(target, path, depth = 0):
     folders = [x  for x in os.listdir(path) if os.path.isdir(path + os.sep + x)]
     for folder in folders:
         if not ignore(folder):
-            printFolderContents(target, path + os.sep + folder, depth + 2)
+            print_folder_contents(target, path + os.sep + folder, depth + 2)
 
 
 root_path = '/Volumes/Extension/Video Lessons'
 target = open('/Users/royce/Desktop/VideoIndex.txt', 'w')
+
 target.truncate
-# printFolderContents('/Users/royce/Desktop/VIDEO COPY')
-printFolderContents(target, root_path)
+# print_folder_contents('/Users/royce/Desktop/VIDEO COPY')
+print_folder_contents(target, root_path)
 target.close
 
 # path = '/Volumes/Extension/Video Lessons/'
