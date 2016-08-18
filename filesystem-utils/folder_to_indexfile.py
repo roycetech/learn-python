@@ -9,6 +9,12 @@
 
 import glob
 import os
+import logging
+
+logger = logging.getLogger('root')
+FORMAT = "[%(levelname)s] %(asctime)s %(funcName)s:%(lineno)s - %(message)s"
+logging.basicConfig(format=FORMAT)
+logger.setLevel(logging.DEBUG)
 
 
 def ignore(path):
@@ -18,45 +24,31 @@ def ignore(path):
 
 # @param target - file handle for writing.
 # @param path - path to recurse
-def print_folder_contents(target, path, depth = 0):
-    if depth == 0:
-        space = ''
-    else:
-        space = '  ' * depth
+def print_folder_contents(f, path, depth = 0):
+    space = '' if depth == 0 else ' ' * (depth - 2)
 
-    # print('D' + space + path)
-    short_folder_name = path + os.linesep
-    global root_path
+    rel_path = os.path.relpath(path, root_path)
+    
+    if rel_path != '.':
+        logger.debug(space + rel_path)
+        f.write(space + rel_path + '\n')
 
-    # print(root_path)
-
-    short_folder_name = short_folder_name.replace(root_path, '')
-    print(short_folder_name)
-    target.write('D' + space + short_folder_name)
-
-    files = [x  for x in os.listdir(path) if not os.path.isdir(path + os.sep + x)]
-    for f in files:
-        if not ignore(f):
-            pass
-            # print('F' + space + '  ' + f)
-
-    folders = [x  for x in os.listdir(path) if os.path.isdir(path + os.sep + x)]
+    folders = [x  for x in os.listdir(path) if os.path.isdir(os.path.join(path, x))]
     for folder in folders:
         if not ignore(folder):
-            print_folder_contents(target, path + os.sep + folder, depth + 2)
-
+            print_folder_contents(f, os.path.join(path, folder), depth + 2)
 
 root_path = '/Volumes/Extension/Video Lessons'
-target = open('/Users/royce/Desktop/VideoIndex.txt', 'w')
+# root_path = '/Users/royce/Desktop/VIDEO COPY/'
+filename = '/Users/royce/Desktop/VideoIndex.txt'
+# filename = '/Users/royce/Desktop/VideoIndexTest.txt'
 
-target.truncate
-# print_folder_contents('/Users/royce/Desktop/VIDEO COPY')
-print_folder_contents(target, root_path)
-target.close
+f = open(filename, 'w')
+f.truncate
+logger.debug(type(f))
 
-# path = '/Volumes/Extension/Video Lessons/'
-# path = '/Users/royce/Desktop/VIDEO COPY/'
-
+print_folder_contents(f, root_path)
+f.close
 
 print('End.')
 
