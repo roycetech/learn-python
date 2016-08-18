@@ -7,14 +7,13 @@
 # `target`
 
 
-import glob
 import os
 import logging
 
 logger = logging.getLogger('root')
 FORMAT = "[%(levelname)s] %(asctime)s %(funcName)s:%(lineno)s - %(message)s"
 logging.basicConfig(format=FORMAT)
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
 
 def ignore(path):
@@ -43,12 +42,11 @@ root_path = '/Volumes/Extension/Video Lessons'
 filename = '/Users/royce/Desktop/VideoIndex.txt'
 
 # Test
-root_path = '/Users/royce/Desktop/VIDEO COPY/'
-filename = '/Users/royce/Desktop/VideoIndexTest.txt'
+# root_path = '/Users/royce/Desktop/VIDEO COPY/'
+# filename = '/Users/royce/Desktop/VideoIndexTest.txt'
 
 f = open(filename, 'w')
 f.truncate
-logger.debug(type(f))
 
 print_folder_contents(f, root_path)
 f.close
