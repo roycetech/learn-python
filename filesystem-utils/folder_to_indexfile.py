@@ -38,10 +38,13 @@ def print_folder_contents(f, path, depth = 0):
         if not ignore(folder):
             print_folder_contents(f, os.path.join(path, folder), depth + 2)
 
+# Actual
 root_path = '/Volumes/Extension/Video Lessons'
-# root_path = '/Users/royce/Desktop/VIDEO COPY/'
 filename = '/Users/royce/Desktop/VideoIndex.txt'
-# filename = '/Users/royce/Desktop/VideoIndexTest.txt'
+
+# Test
+root_path = '/Users/royce/Desktop/VIDEO COPY/'
+filename = '/Users/royce/Desktop/VideoIndexTest.txt'
 
 f = open(filename, 'w')
 f.truncate
