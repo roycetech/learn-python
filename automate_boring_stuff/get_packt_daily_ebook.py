@@ -20,23 +20,19 @@ browser.get('https://www.packtpub.com/packt/offers/free-learning')
 claim_button = browser.find_element_by_css_selector("div.book-claim-token-inner > input.form-submit")
 claim_button.click()
 
-# sleep(1)
 
-email_field = browser.find_element_by_css_selector("#email")
+email_field = browser.find_element_by_id("email")
 email_field.send_keys(email)
 
-pw_field = browser.find_element_by_css_selector("#password")
+pw_field = browser.find_element_by_id("password")
 pw_field.send_keys(password)
 
-submit = browser.find_element_by_css_selector('#packt-user-login-form-respo > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > input:nth-child(1)')
-submit.click()
+email_field.submit()
 
 
 # Cache have changed due to page reload, so re-fetch.
 claim_button = browser.find_element_by_css_selector("div.book-claim-token-inner > input.form-submit")
 claim_button.click()
-
-# browser.find_element_by_css_selector("div.book-claim-token-inner > input.form-submit").click()
 
 
 print('Program end.')
