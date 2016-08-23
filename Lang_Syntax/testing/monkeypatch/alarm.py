@@ -1,7 +1,8 @@
 from sensor import Sensor
 
-class Alarm(object, sensor=None):
-    def __init__(self):
+class Alarm(object):
+
+    def __init__(self, sensor=None):
         self._low_pressure_threshold = 17
         self._high_pressure_threshold = 21
         self._sensor = sensor or Sensor()

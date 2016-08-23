@@ -1,2 +1,3 @@
 class Sensor:
-    pass
+    def sample_pressure():
+        pass
