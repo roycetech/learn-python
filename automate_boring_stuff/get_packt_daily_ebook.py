@@ -34,5 +34,6 @@ email_field.submit()
 claim_button = browser.find_element_by_css_selector("div.book-claim-token-inner > input.form-submit")
 claim_button.click()
 
+browser.quit()
 
 print('Program end.')
