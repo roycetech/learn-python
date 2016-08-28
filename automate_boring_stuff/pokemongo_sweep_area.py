@@ -1,32 +1,34 @@
-import pyautogui
+from pyautogui import *
 import time
 
 
 # duration is in seconds
 
 
-while (true):
+def moveNorth(duration):
+    move('w', duration)
+
+def moveSouth(duration):
+    move('s', duration)
+
+def moveEast(duration):
+    move('d', duration)
+
+def moveWest(duration):
+    move('a', duration)
+
+
+def move(key, duration):
+    print('Pressing down: ' + key);
+    keyDown(key)
+    time.sleep(duration)
+    keyUp(key)
+
+
+while (True):
     moveNorth(10)
     moveEast(3)
     moveSouth(10)
     moveEast(3)
 
 
-def moveNorth(duration):
-    move('w')
-
-def moveSouth(duration):
-    move('s')
-
-def moveEast(duration):
-    move('d')
-
-def moveWest(duration):
-    move('a')
-
-
-def move(key):
-    print('Pressing down: ' + key);
-    keyDown(key)
-    sleep(duration)
-    keyUp(key)
