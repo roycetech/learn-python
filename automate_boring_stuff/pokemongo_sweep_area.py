@@ -26,9 +26,9 @@ def move(key, duration):
 
 
 while (True):
-    moveNorth(10)
-    moveEast(3)
-    moveSouth(10)
-    moveEast(3)
+    moveNorth(20)
+    moveEast(8)
+    moveSouth(20)
+    moveEast(8)
 
 
