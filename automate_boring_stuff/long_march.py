@@ -2,9 +2,6 @@ from pyautogui import *
 import time
 
 
-# duration is in seconds
-
-
 def moveNorth(duration):
     move('w', duration)
 
@@ -37,41 +34,10 @@ def move(key, duration):
         sys.exit()
 
 
+# Program Start ===============
 print("Starting in 2 Seconds...")
 time.sleep(2)
 # click bluestack app from the taskbar
-bspos = locateCenterOnScreen("blue_stacks_task_icon.png")
-print(bspos)
-click(bspos)
-# click(1000, 1055)
+click(locateCenterOnScreen("blue_stacks_task_icon.png"))
 
-
-flag = True
-while (flag):
-    moveNorth(8)
-    moveEast(8)
-    moveSouth(8)
-    moveEast(8)
-    moveNorth(8)
-    moveEast(8)
-    moveSouth(20)
-    moveWest(8)
-    moveNorth(8)
-    moveWest(8)
-    moveSouth(8)
-    moveWest(8)
-    moveNorth(8)
-    moveWest(8)
-    moveSouth(8)
-    moveWest(8)
-    moveNorth(20)
-    moveEast(8)
-    moveSouth(8)
-    moveEast(8)
-
-    # flag = False
-    print("Back to Origin")
-	
-	
-	
-
+moveNorth(60*60)
