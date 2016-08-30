@@ -1,15 +1,11 @@
 import pyautogui
-import time
-
-
-# click bluestack app from the taskbar
-pyautogui.click(pyautogui.locateCenterOnScreen("blue_stacks_task_icon.png"))
-# pyautogui.click(1000, 1055)
-
-pyautogui.moveTo(1275, 700)
 
 
 def throw_pokeball(distance):
+	# click bluestack app from the taskbar
+	pyautogui.click(pyautogui.locateCenterOnScreen("blue_stacks_task_icon.png"))
+	# pyautogui.moveTo(1275, 700)
+	pyautogui.moveTo(1384, 580)
 	# short distance
 	if distance == 1:
 		pyautogui.dragRel(0, -300, .2, button='left')
@@ -25,13 +21,3 @@ def throw_pokeball(distance):
 	# far distance
 	else:
 		pyautogui.dragRel(0, -500, .25, button='left')
-
-
-throw_pokeball(3)
-
-
-
-# click back script
-
-pyautogui.click(pyautogui.locateCenterOnScreen("sublime2_task_icon.png"))
-# pyautogui.click(845, 1055)

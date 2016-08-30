@@ -1,7 +1,9 @@
 import tkinter
 import pyautogui
+import time
+import threading
 
-# import throw_pokeball
+import throw_pokeball
 # import area_sweeper
 # import pokemon_marcher
 
@@ -9,7 +11,7 @@ import pyautogui
 gui = tkinter.Tk()
 gui.title("Pokébot - Idle")
 gui.geometry("250x260")
-
+eventTriggered = False
 
 # Mouse Position
 def savePosition():
@@ -18,29 +20,56 @@ def savePosition():
 
 # Mouse Position
 def loadPosition():
+    # pass
+    global eventTriggered
     pyautogui.moveTo(position[0], position[1])
+    eventTriggered = False
+
 
 
 def feed():
-    savePosition()
-    loadPosition()
+    print("feed!")
+    # global eventTriggered
+    # if eventTriggered:
+    #     eventTriggered = False
+    #     return        
+    eventTriggered = True
+    def callback():
+        savePosition()
+        pyautogui.click(1430, 712)
+        time.sleep(.5)
+        pyautogui.click(1200, 500)
+        # eventTriggered = False
+    t = threading.Thread(target=callback)
+    t.start()
 
 
 def sweep():
     pass
 
-
 def throw1():
-    _throw(1)
+    throw_comon(1)
 
 def throw2():
-    _throw(2)
+    throw_comon(2)
 
 def throw3():
-    _throw(3)
+    throw_comon(3)
 
-def _throw(throw_type):
-    print("Doing type %d throw!" % throw_type);
+def throw_comon(throw_type):
+    global eventTriggered
+    if eventTriggered:
+        eventTriggered = False
+        return    
+    def callback():
+        savePosition()
+        throw_pokeball.throw_pokeball(throw_type)
+        loadPosition()
+        eventTriggered = False
+    t = threading.Thread(target=callback)
+    t.start()
+    eventTriggered = True
+
 
 
 def marchNorth():
@@ -101,8 +130,8 @@ marchSouth = tkinter.Button(text='March South', command=marchSouth)
 marchSouth.pack()
 
 
-btnBerry = tkinter.Button(text='Razz Berry ', command=feed)
-btnBerry.pack()
+# btnBerry = tkinter.Button(text='Razz Berry ', command=feed)
+# btnBerry.pack()
 
 
 btnNear = tkinter.Button(text='Throw Pokéball Near', command=throw1)
