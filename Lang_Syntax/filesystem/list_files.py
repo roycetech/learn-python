@@ -1,6 +1,6 @@
- #!/usr/bin/env python3.5
+#!/usr/bin/env python3.5
 
-import glob;
+import glob
 
 files = glob.glob('*.py')
 
