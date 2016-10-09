@@ -1,39 +1,35 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 {% load staticfiles %}
-<html>
-  <head>
-    <title>TreasureGram</title>
-    <link rel="stylesheet"
-          type="text/css"
-          href="{% static 'bootstrap.min.css' %}" />
-    <link rel="stylesheet"
-          type="text/css"
-          href="{% static 'style.css' %}" />
-  </head>
 
-  <body>
-    <h1>TreasureGram</h1>
-    <main class="container" role="main">
-      <div class="treasure panel panel-default">
-      {% for treasure in treasures %}
-          <div class="panel-heading">
-            <div class="panel-title">
-               <p>{{ treasure.name }}</p>
-            </div>
+{% block content %}
+
+<div class="row">
+{% for treasure in treasures %}
+  <div class="col-md-4">
+    <a href="/{{ treasure.id }}/">
+      <div class="panel treasure panel-default">
+        <div class="panel-heading">
+             <h2 class="panel-title">{{ treasure.name }}</h2>
           </div>
-          <div class="panel-body">
-            <div class="treasure-table">
-              <p>{{ treasure.material }}&nbsp;
-              {% if treasure.value > 0 %}
-                  {{ treasure.value }}
-              {% else %}
-                  Unknown
-              {% endif %}
-              </p>
-            </div>
-          </div>
-      {% endfor %}
+        </div>
       </div>
-    </main>
-  </body>
-</html>
+      <div class="treasure-photo">
+        <img src="{{ treasure.image.url }}" alt="none" height="100">
+      </div>
+    </a>
+  </div>
+{% if forloop.counter|divisibleby:3 %}
+  </div><div class="row">
+{% endif %}
+{% endfor %}
+</div>
+
+
+<form enctype="multipart/form-data" action="post_url/" method="post" >
+  {% csrf_token %}
+  <div class="field-wrapper">
+    {{ form.as_p }}
+  </div>
+  <input type="submit" value="Submit">
+</form>
+{% endblock %}
