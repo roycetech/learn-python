@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <title>TreasureGram</title>
+    <link rel="stylesheet"
+          type="text/css"
+          href="{% static 'bootstrap.min.css' %}" />
+    <link rel="stylesheet"
+          type="text/css"
+          href="{% static 'style.css' %}" />
+  </head>
+
+  <body>
+    <h1>TreasureGram</h1>
+    <main class="container" role="main">
+      <div class="treasure panel panel-default">
+      {% for treasure in treasures %}
+          <div class="panel-heading">
+            <div class="panel-title">
+               <p>{{ treasure.name }}</p>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="treasure-table">
+              <p>{{ treasure.material }}&nbsp;
+              {% if treasure.value > 0 %}
+                  {{ treasure.value }}
+              {% else %}
+                  Unknown
+              {% endif %}
+              </p>
+            </div>
+          </div>
+      {% endfor %}
+      </div>
+    </main>
+  </body>
+</html>
