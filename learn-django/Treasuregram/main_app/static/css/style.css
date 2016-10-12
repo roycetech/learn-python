@@ -45,6 +45,10 @@ body {
 
 /* ----- Custom Stuff ----- */
 
+nav>a:last {
+  margin-right: 20px;
+}
+
 .footer {
   border-top: 1px solid #c6b397;
   color: #d0b695;

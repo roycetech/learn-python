@@ -1,11 +1,10 @@
 from django.shortcuts import render
 from .models import Treasure
 from .forms import TreasureForm, LoginForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 
-from django.contrib.auth import authenticate, login
-# , logout
+from django.contrib.auth import authenticate, login, logout
 
 
 def login_view(request):
@@ -28,6 +27,11 @@ def login_view(request):
     else:
         form = LoginForm()
         return render(request, 'login.html', {'form': form})
+
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/')
 
 
 # Create your views here.
@@ -61,6 +65,20 @@ def profile(request, username):
     treasures = Treasure.objects.filter(user=user)
     return render(request, 'profile.html', {'username': username,
                                             'treasures': treasures})
+
+
+def like_treasure(request):
+    treasure_id = request.POST.get('treasure_id', None)
+
+    likes = 0
+    if (treasure_id):
+        treasure = Treasure.objects.get(id=int(treasure_id))
+        if treasure is not None:
+            likes = treasure.likes + 1
+            treasure.likes = likes
+            treasure.save()
+    return HttpResponse(likes)
+
 
 # class Treasure:
 #     def __init__(self, name, value, material, location, img_url):
